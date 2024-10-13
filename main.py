@@ -11,9 +11,13 @@ from launcher import create_game_script, create_shortcut
 if not os.path.exists(os.path.expanduser("~/.protonlauncher")):
     os.makedirs(os.path.expanduser("~/.protonlauncher"))
     # Download the default icon to the ~/.protonlauncher directory
-    icon_url = ""
-    icon_path = os.path.expanduser("~/.protonlauncher/icon.png")
-    os.system(f"wget {icon_url} -O {icon_path}")
+    try:
+        icon_url = "https://raw.githubusercontent.com/CesarGarza55/ProtonLauncher/refs/heads/main/icons/icon.png"
+        icon_path = os.path.expanduser("~/.protonlauncher/icon.png")
+        os.system(f"wget {icon_url} -O {icon_path}")
+    except:
+        # If the icon can't be downloaded, use the default icon from the folder
+        icon_path = os.path.join(os.path.dirname(__file__), "icons/icon.png")
 
 
 app_dir = os.path.expanduser("~/.protonlauncher")
