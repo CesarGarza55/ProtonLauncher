@@ -1,7 +1,7 @@
 import os
 import json
 
-# Crear directorio .protonlauncher en el home
+# Create the application directory
 app_dir = os.path.expanduser("~/.protonlauncher")
 
 CONFIG_PATH = os.path.join(app_dir, "config.json")

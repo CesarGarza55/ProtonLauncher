@@ -2,6 +2,7 @@ import os
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 from config import load_desktop, set_desktop
+
 home = os.path.expanduser("~")
 app_dir = os.path.expanduser("~/.protonlauncher")
 
@@ -28,19 +29,23 @@ if [ ! -d "$STEAM_COMPAT_DATA_PATH" ]; then
 fi
 
 # Ejecutar el juego con Proton-GE
-$HOME/.steam/root/compatibilitytools.d/{game_data["proton"]}/proton run \\
+""")
+        if game_data.get('mangohud', False):
+            f.write("MANGOHUD=1 ")
+
+        f.write(f"""$HOME/.steam/root/compatibilitytools.d/{game_data["proton"]}/proton run \\
 "{game_data['path']}"
 """)
-    os.chmod(script_path, 0o755)  # Hacer el script ejecutable
+    os.chmod(script_path, 0o755)  # Make the script executable
 
 def get_desktop_directory():
-    # Intentar obtener el directorio del escritorio desde la variable de entorno
+    # Try to get the desktop directory from the XDG environment variables
     desktop_dir = os.getenv("XDG_DESKTOP_DIR")
     if desktop_dir and os.path.exists(desktop_dir):
         set_desktop(desktop_dir)
         return desktop_dir
 
-    # Comprobar nombres comunes del directorio del escritorio
+    # Try to find the desktop directory in the home directory
     common_desktop_dirs = ["Desktop", "Escritorio"]
     for d in common_desktop_dirs:
         desktop_path = os.path.join(home, d)
@@ -48,11 +53,11 @@ def get_desktop_directory():
             set_desktop(desktop_path)
             return desktop_path
     
-    # Retorna None si no se encuentra ninguno
+    # Return None if the desktop directory could not be found
     return None
 
 def create_shortcut(game_data):
-    # Intenta obtener el directorio del escritorio del archivo de configuraciones
+    # Try to get the desktop directory
     desktop_dir = load_desktop()
     if not desktop_dir:
         desktop_dir = get_desktop_directory()
@@ -82,7 +87,7 @@ Icon={game_data['icon']}
 Terminal=false
 """)
     
-    # Hacer el acceso directo ejecutable
+    # Make the desktop file executable
     os.chmod(desktop_file_path, 0o755)
 
     msg = QMessageBox()
