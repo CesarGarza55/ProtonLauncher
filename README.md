@@ -1,4 +1,5 @@
 TECHNICALLY IT WORKS BUT IT IS UNNECESSARY BECAUSE [BOTTLES](https://usebottles.com/) DOES THE SAME THING AND BETTER.
+
 At least it helped me learn :P
 
 # ProtonLauncher
