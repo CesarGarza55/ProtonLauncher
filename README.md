@@ -1,3 +1,6 @@
+TECHNICALLY IT WORKS BUT IT IS UNNECESSARY BECAUSE [BOTTLES](https://usebottles.com/) DOES THE SAME THING AND BETTER.
+At least it helped me learn :P
+
 # ProtonLauncher
 
 ProtonLauncher is a project aimed at simplifying the process of launching and managing non-steam games using [Proton-GE](https://github.com/GloriousEggroll/proton-ge-custom).
